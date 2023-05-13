@@ -1,12 +1,18 @@
 #version 120
 
-varying vec2 lmcoord;
-varying vec2 texcoord;
-varying vec4 glcolor;
+varying vec2 TexCoords;
+varying vec2 LightmapCoords;
+
+varying vec3 Normal;
+varying vec4 Color;
 
 void main() {
 	gl_Position = ftransform();
-	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
-	lmcoord  = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
-	glcolor = gl_Color;
+	TexCoords = gl_MultiTexCoord0.st;
+
+	LightmapCoords = mat2(gl_TextureMatrix[1]) * gl_MultiTexCoord1.st;
+	LightmapCoords = (LightmapCoords * 33.05 / 32.0) - (1.05 / 32.0);
+
+	Normal = gl_NormalMatrix * gl_Normal;
+	Color = gl_Color;
 }
