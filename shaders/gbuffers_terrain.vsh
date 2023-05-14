@@ -4,7 +4,7 @@ varying vec2 TexCoords;
 varying vec2 LightmapCoords;
 
 varying vec3 Normal;
-varying vec4 Color;
+varying vec4 Colour;
 
 void main() {
 	gl_Position = ftransform();
@@ -14,5 +14,5 @@ void main() {
 	LightmapCoords = (LightmapCoords * 33.05 / 32.0) - (1.05 / 32.0);
 
 	Normal = gl_NormalMatrix * gl_Normal;
-	Color = gl_Color;
+	Colour = gl_Color;
 }
